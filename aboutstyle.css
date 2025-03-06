@@ -1,0 +1,269 @@
+
+/* Banner Section */
+.banner {
+  background:  #264653;
+  padding: 80px;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.banner h1 {
+  font-size: 36px;
+  color: hsl(85, 37%, 86%);
+  margin-bottom: 15px;
+}
+
+.banner p {
+  font-size: 18px;
+  color: #e63946;
+  line-height: 1.6;
+}
+
+/* Image Section */
+.image-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Aligns the items to the top */
+  padding: 0;
+  height: auto;
+}
+
+.about-image {
+  width: 45%; /* 40% of the container width */
+  max-height: 450px; /* Limits the maximum height */
+  height: auto; /* Keeps the aspect ratio */
+  object-fit: fill; /* Shows the entire image without cropping */
+  border-radius: 5px;
+  border: 5px solid #264653;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: auto;
+}
+
+.image-content {
+  width: 50%;
+  padding-left: 20px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically centers the content */
+}
+
+.image-content h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.image-content p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+
+/* New Image Section */
+.new-image-section {
+  text-align: left;
+  margin: 40px 0;
+}
+
+.new-image {
+  /* Increase the size so that the image fills its container */
+  width: 45%;
+  height: 400px;
+  /* object-fit: cover makes the image cover the entire container (cropping if necessary) */
+  object-fit: cover;
+  border-radius: 5px;
+  border: 5px solid #264653;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+.new-image-title {
+  font-size: 32px; /* Increase the font size */
+  font-weight: bold;
+  color: #264653;
+  margin-bottom: 15px;
+  text-align: left; /* Optional: Center the title */
+}
+/* New Image Section with Text on the Right */
+.new-image-section-with-text {
+  display: flex;
+  justify-content: space-between; /* Aligns the image and text */
+  align-items: center; /* Vertically center the content */
+  margin: 40px 0;
+}
+
+.new-image {
+  width: 45%; /* Keeps the image size as before */
+  height: 400px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 5px solid #264653;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.new-image-text {
+  width: 50%; /* Adjust width of the text container */
+  padding-left: 20px; /* Adds space between the image and text */
+  color: #333;
+}
+
+/* New Image Section with Text on the Right */
+.new-image-section-with-text {
+  display: flex;
+  justify-content: space-between; /* Aligns the image and text */
+  align-items: center; /* Vertically center the content */
+  margin: 40px 0;
+}
+/* About Page Section */
+.aboutpage23 {
+  display: flex;
+  justify-content: space-between; /* Aligns image and text horizontally */
+  align-items: center; /* Vertically aligns both image and text */
+  margin: 40px 0;
+}
+
+.aboutpage23-image {
+  width: 45%; /* Keeps the image size at 45% */
+  max-height: 450px; /* Limits the image height */
+  height: auto; /* Keeps the aspect ratio */
+  object-fit: cover; /* Ensures the image fills the space without distortion */
+  border-radius: 5px;
+  border: 5px solid #264653;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.aboutpage23-text {
+  width: 50%; /* Ensures the text takes up 50% of the space */
+  padding-left: 20px; /* Adds some spacing between the image and text */
+  color: #115ec2;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.aboutpage23-text h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+/* New Layout for Right-Side Image */
+.aboutpage23-right {
+  display: flex;
+  justify-content: space-between; /* Align image and text horizontally */
+  align-items: center; /* Vertically align both image and text */
+  margin: 40px 0;
+}
+
+.aboutpage23-right-image {
+  width: 45%; /* Image will take 45% of the container width */
+  max-height: 450px; /* Limits the maximum height of the image */
+  height: auto; /* Keeps the image's aspect ratio intact */
+  object-fit: cover; /* Ensures the image covers the container space */
+  border-radius: 5px;
+  border: 5px solid #264653;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.aboutpage23-text {
+  width: 50%; /* Text will take 50% of the container width */
+  padding-right: 20px; /* Adds space between the text and image */
+  color: #333;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.aboutpage23-text h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+/* Banner Below Right-Side Image */
+.right-banner {
+  background-color: #264653; /* Dark background color */
+  padding: 40px;
+  margin-top: 20px;
+  color: #fff;
+  height:350px;
+}
+
+.right-banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.right-banner-title {
+  font-size: 32px;
+  color: #e63946; /* Red color for title */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.right-banner-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #f1f1f1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* New Image Section */
+.new-image-section {
+  text-align: left;
+  margin: 40px 0;
+}
+
+.new-image {
+  /* Reduced size and height for the image */
+  width: 30%; /* Reduced the width */
+  height: 250px; /* Set a specific height */
+  object-fit: cover; /* Makes the image cover the entire container (cropping if necessary) */
+  border-radius: 5px;
+  border: 5px solid #264653;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.new-image-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #264653;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+/* QR Trust Image Section */
+.qr-trust-image {
+  width: 100%; /* Make sure the container takes up the full width */
+  max-width: 300px; /* Set a max width to avoid stretching the image too wide */
+  height: auto; /* Maintain the aspect ratio */
+  margin: 0 auto; /* Center the image */
+  text-align: center; /* Center the image within the container */
+}
+
+.qr-trust-image img {
+  width: 100%; /* Ensure the image fills the container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure the image fits without zooming in or cropping */
+}
+.final-banner {
+  background: #264653;
+  padding: 40px 20px;
+  text-align: center;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.final-banner-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.final-banner-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.final-banner-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}

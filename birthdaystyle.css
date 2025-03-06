@@ -1,0 +1,53 @@
+
+  .foundation-content {
+    max-width: 80%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.foundation-content h2 {
+    font-size: 28px;
+    color: #e63946;
+    margin-bottom: 15px;
+}
+
+.foundation-content p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+}
+.image-gallery {
+    display: flex;
+    justify-content: flex-start; /* Aligns image to the left */
+    align-items: center; /* Centers vertically */
+    height: 50vh; /* Adjust height to bring images to the middle */
+    margin-left: 5%; /* Adjust this for exact positioning */
+    gap: 20px; /* Removes any space between images */
+}
+
+.image-item {
+    max-width: 400px; /* Set a consistent max width */
+    width: 100%; /* Ensure responsiveness */
+    margin: 0; /* Remove any extra margins */
+    padding: 0; /* Remove padding */
+}
+
+.image-item img {
+    width: 100%; /* Ensures both images have the same width */
+    height: 300px; /* Set a fixed height to ensure uniformity */
+    object-fit: cover; /* Ensures the image maintains aspect ratio */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    display: block; /* Removes any inline spacing */
+}
+
+.image-item img:hover {
+    transform: scale(1.05);
+}
+
+

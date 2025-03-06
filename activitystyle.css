@@ -1,0 +1,69 @@
+
+/* Banner Image */
+.banner-image {
+    width: 100%;
+    height: 550px; /* Increase height (adjust as needed) */
+    overflow: hidden;
+}
+
+.banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.new-container {
+  width: 50%; /* Reduced width */
+  margin: 30px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1a1a, #4a90e2); /* Dark to light gradient */
+  border: 2px solid #185da7;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust text colors for readability */
+.new-container h2 {
+  color: #fff; /* White text for contrast */
+  margin-bottom: 10px;
+}
+
+.new-container p {
+  color: #ddd; /* Light gray for readability */
+}
+
+/* Keep the button styles */
+.new-container .btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #e100ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.new-container .btn:hover {
+  background: #00a7b3;
+}
+.activity-container {
+  width: 100%;
+  max-width: none !important;
+}
+.activity-container img:nth-child(2) {
+  width: 300px; /* Adjust the width as needed */
+  height: 200px; /* Adjust the height if necessary */
+
+}
+
+.activity-container img {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.activity-container img:hover {
+  transform: scale(1.1); /* Slight zoom effect on hover */
+  opacity: 0.9; /* Slight fade effect */
+}

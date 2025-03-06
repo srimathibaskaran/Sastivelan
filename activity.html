@@ -1,0 +1,283 @@
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> SastiVelan</title>
+    <link rel="stylesheet" href="activitystyle.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for dropdown */
+        .dropdown-menu {
+            display: none;
+        }
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Increased width */
+    height: 500px; /* Increased height */
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px; /* Smooth edges */
+}
+
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 300%;
+}
+
+.slide {
+    flex: 1 0 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures full image fit */
+}
+
+/* Navigation Buttons */
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    font-size: 24px;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="logo">
+                <img src="logo.jpeg" alt="Logo" class="h-12">
+            </div>
+    
+            <!-- Hamburger Menu (for Mobile) -->
+            <button id="hamburger" class="text-white md:hidden text-2xl">
+                ☰
+            </button>
+    
+            <!-- Navigation Links (Desktop) -->
+            <ul id="navLinks" class="hidden md:flex space-x-6 text-white">
+                <li><a href="index.html" class="hover:text-gray-300">Home</a></li>
+                <li><a href="about.html" class="hover:text-gray-300">About</a></li>
+                <li><a href="activity.html" class="hover:text-gray-300">Special Children</a></li>
+                <li><a href="contact.html" class="hover:text-gray-300">Contact</a></li>
+                <li><a href="support.html" class="hover:text-gray-300">Support</a></li>
+    
+                <!-- Projects Dropdown -->
+                <li class="relative dropdown">
+                    <a href="#" class="hover:text-gray-300 dropdown-btn">Projects ▼</a>
+                    <ul class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white text-black shadow-lg rounded-lg">
+                        <li><a href="activity.html" class="block px-4 py-2 hover:bg-gray-200">Welfare Activity</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Tuition Center</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Medical Campaigns</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Educational Campaigns</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Feedback</a></li>
+                    </ul>
+                </li>
+    
+                <li><a href="#" class="hover:text-gray-300">Village Empowerment</a></li>
+    
+                <!-- More Dropdown -->
+                <li class="relative dropdown">
+                    <a href="#" class="hover:text-gray-300 dropdown-btn">More ▼</a>
+                    <ul class="dropdown-menu hidden absolute left-0 mt-2 w-48 bg-white text-black shadow-lg rounded-lg">
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">National Sports Meet</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Students Achievement</a></li>
+                        <li><a href="activity.html" class="block px-4 py-2 hover:bg-gray-200">Activity</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-gray-200">Blogs</a></li>
+                        <li><a href="birthdaycelebration.html" class="block px-4 py-2 hover:bg-gray-200">Birthday Celebration</a></li>
+                        <li><a href="support.html" class="block px-4 py-2 hover:bg-gray-200">Support</a></li>
+                        <li><a href="contact.html" class="block px-4 py-2 hover:bg-gray-200">Contact Us</a></li>
+                        <li><a href="volunteer.html" class="block px-4 py-2 hover:bg-gray-200">Volunteer</a></li>
+                    </ul>
+                </li>
+    
+                <!-- Donate Button -->
+                <li class="bg-yellow-500 px-4 py-2 rounded text-white">
+                    <a href="donate.html">Donate Now</a>
+                </li>
+                <li class="bg-yellow-500 px-4 py-2 rounded text-white">
+                    <a href="adminlogin.html">Admin login</a>
+                </li>
+            </ul>
+        </div>
+    
+        <!-- Mobile Menu -->
+        <ul id="mobile-menu" class="hidden bg-blue-700 text-white text-center md:hidden">
+            <li><a href="index.html" class="block py-2">Home</a></li>
+            <li><a href="about.html" class="block py-2">About</a></li>
+            <li><a href="activity.html" class="block py-2">Special Children</a></li>
+            <li><a href="#" class="block py-2">Disaster Relief</a></li>
+            <li><a href="support.html" class="hover:text-gray-300">Support</a></li>
+
+    
+            <!-- Mobile Dropdowns -->
+            <!-- Mobile Dropdowns -->
+<li class="relative">
+    <button class="mobile-dropdown-btn w-full text-left py-2 px-4 bg-blue-800">
+        Projects ▼
+    </button>
+    <ul class="mobile-dropdown-menu hidden bg-blue-900 text-white">
+        <li><a href="#" class="block py-2 px-4">Welfare Activity</a></li>
+        <li><a href="#" class="block py-2 px-4">Tuition Center</a></li>
+        <li><a href="#" class="block py-2 px-4">Medical Campaigns</a></li>
+        <li><a href="#" class="block py-2 px-4">Educational Campaigns</a></li>
+        <li><a href="#" class="block py-2 px-4">Feedback</a></li>
+    </ul>
+</li>
+
+    
+            <li><a href="#" class="block py-2">Village Empowerment</a></li>
+            <li class="bg-yellow-500"><a href="adminlogin.html" class="block py-2">Admin login</a></li>
+             <br>
+            <li class="bg-yellow-500"><a href="donate.html" class="block py-2">Donate Now</a></li>
+        </ul>
+    </nav>
+    
+    
+
+      <!-- Banner Image -->
+<div class="banner-image">
+  <img src="activity.jpeg" alt="banner 6" />
+</div>
+<!-- New Separate Container Below Banner -->
+<div class="new-container">
+<h2>Our Activities</h2>
+<p>Join us in making a difference. Explore our programs and support our mission.</p>
+<a href="get-involved.html" class="btn">View</a>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white mt-10 py-6">
+        <div class="container mx-auto grid md:grid-cols-3 gap-6 text-center md:text-left">
+            <!-- Quick Links -->
+            <div>
+                <h2 class="font-bold text-lg">Quick Links</h2>
+                <ul class="mt-2 space-y-2">
+                    <li><a href="index.html" class="hover:underline">Home</a></li>
+                    <li><a href="about.html" class="hover:underline">About</a></li>
+                    <li><a href="contact.html" class="hover:underline">Contact</a></li>
+                    <li><a href="donate.html" class="hover:underline">Donate Now</a></li>
+                </ul>
+            </div>
+            <!-- Contact Info -->
+            <div>
+                <h2 class="font-bold text-lg">Contact</h2>
+                <p class="mt-2">Email: mlakshimipriya715@gmail.com</p>
+                <p>Phone: 6374512190</p>
+                <p>Address: 123 Street, City, Country</p>
+            </div>
+            <!-- Social Media -->
+            <div>
+                <h2 class="font-bold text-lg">Follow Us</h2>
+                <div class="flex justify-center md:justify-start mt-2 space-x-4">
+                    <a href="#" class="hover:text-gray-300">Facebook</a>
+                    <a href="#" class="hover:text-gray-300">Twitter</a>
+                    <a href="#" class="hover:text-gray-300">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <p class="text-center mt-6">© 2025 All Rights Reserved</p>
+    </footer>
+
+    <!-- JavaScript -->
+    
+      
+    <script>
+        // Hamburger menu toggle
+        document.getElementById("hamburger").addEventListener("click", function () {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+        // Enable dropdown on click (for mobile)
+        document.querySelectorAll(".dropdown > a").forEach(item => {
+            item.addEventListener("click", function (event) {
+                event.preventDefault(); 
+                this.parentElement.classList.toggle("active");
+            });
+        });
+
+        // Slider functionality
+        let slideIndex = 0;
+const slides = document.querySelectorAll(".slider img");
+const totalSlides = slides.length;
+
+function showSlide(index) {
+    if (index >= totalSlides) slideIndex = 0;
+    if (index < 0) slideIndex = totalSlides - 1;
+    document.querySelector(".slider").style.transform = `translateX(-${slideIndex * 100}vw)`;
+}
+
+function nextSlide() {
+    slideIndex++;
+    showSlide(slideIndex);
+}
+
+function prevSlide() {
+    slideIndex--;
+    showSlide(slideIndex);
+}
+
+setInterval(nextSlide, 3000); // Auto slide every 3 seconds
+
+    </script> 
+    <script>
+        
+      
+            // Toggle Dropdowns in Mobile Menu
+            document.querySelectorAll(".mobile-dropdown-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    this.nextElementSibling.classList.toggle("hidden");
+                });
+            });
+        
+      </script>
+      
+
+</body>
+</html>
