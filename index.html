@@ -72,7 +72,53 @@
     display: none;
 }
 
+.slider-container {
+        position: relative;
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: 10px;
+    }
 
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slider img {
+        width: 100%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    /* Navigation buttons */
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 50%;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .prev, .next {
+            padding: 8px;
+            font-size: 16px;
+        }
+    }
 
     </style>
 </head>
@@ -254,6 +300,43 @@ function prevSlide() {
 }
 
 setInterval(nextSlide, 3000); // Auto slide every 3 seconds
+        let currentIndex = 0;
+    const slides = document.querySelectorAll(".slider img");
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+        if (index < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (index >= totalSlides) {
+            currentIndex = 0;
+        } else {
+            currentIndex = index;
+        }
+        document.querySelector(".slider").style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function prevSlide() {
+        showSlide(currentIndex - 1);
+    }
+
+    function nextSlide() {
+        showSlide(currentIndex + 1);
+    }
+
+    // Auto Slide Every 3s
+    setInterval(nextSlide, 3000);
+
+    // Touch Swipe Support
+    let startX = 0;
+    document.querySelector(".slider-container").addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    document.querySelector(".slider-container").addEventListener("touchend", (e) => {
+        let endX = e.changedTouches[0].clientX;
+        if (startX > endX + 50) nextSlide();
+        else if (startX < endX - 50) prevSlide();
+    });
 
     </script> 
     <script>
