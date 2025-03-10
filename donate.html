@@ -175,10 +175,16 @@
      <!-- Centered Image -->
      <div class="image-container">
         <img src="qrcode.jpg" alt="Centered Image">
-    
- 
         <h2>Scan to Donate some Money</h2>
     </div>
+
+    <form action="#" method="post">
+        <h3>Donor Information</h3>
+        <input type="text" name="donor_name" placeholder="Donor Name" required>
+        <input type="text" name="contact_number" placeholder="Contact Number" required>
+        <input type="number" name="donation_amount" placeholder="Donation Amount" min="1" required>
+        <button type="submit">Donate</button>
+    </form>
     <!-- Footer -->
     <footer class="bg-blue-900 text-white mt-10 py-6">
         <div class="container mx-auto grid md:grid-cols-3 gap-6 text-center md:text-left">
