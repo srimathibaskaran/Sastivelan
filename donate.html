@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SastiVelan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="supportstyle.css" />
+
     <style>
         /* Custom styles for dropdown */
         .dropdown-menu {
@@ -73,46 +75,7 @@
     display: none;
 }
 
-.image-container {
-            text-align: center;
-            margin: 20px;
-        }
 
-        img {
-            width: 200px;
-            height: 200px;
-        }
-
-        form {
-            margin: 20px auto;
-            width: 300px;
-            text-align: center;
-            background-color: #f4f4f4;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        input[type="text"], input[type="number"] {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
 
     </style>
 </head>
@@ -183,7 +146,9 @@
             <li><a href="about.html" class="block py-2">About</a></li>
             <li><a href="activity.html" class="block py-2">Special Children</a></li>
             <li><a href="#" class="block py-2">Disaster Relief</a></li>
-            <li><a href="support.html" class="hover:text-gray-300">Support</a></li>
+            <li><a href="birthdaycelebration.html" class="block py-2">birthdayCelebration</a></li>
+            <li><a href="donate.html" class="hover:text-gray-300">Support</a></li>
+            <li><a href="contact.html" class="hover:text-gray-300">Contact</a></li>
 
     
             <!-- Mobile Dropdowns -->
@@ -209,21 +174,92 @@
         </ul>
     </nav>
     
+     <!-- Banner Image -->
+  <div class="banner-image">
+    <img src="support.jpeg" alt="help2" />
+  </div>
+
+  <!-- New Content Section with Transparent Container -->
+  <section class="content">
+    <div class="transparent-container">
+      <h2 class="animated-text">The Power of Service in Challenging Times</h2>
+      <p class="animated-text">
+        Sahti Velan Universal Foundation, led by its compassionate founder, has made a remarkable impact in uplifting rural communities, especially during the challenging times of the COVID-19 pandemic. The foundation played a vital role in supporting villagers by providing essential food supplies and other critical assistance when many were struggling to survive. Through tireless efforts, they ensured that even the most remote areas received help, offering a lifeline to those in need. <br>This unwavering commitment to the welfare of the community has inspired countless individuals and set a powerful example of how collective action can bring hope and relief during times of crisis.
+      </p>
+    </div>
+  </section>
+  
+  </section>   <!-- Image inside the box container -->
+   <!-- Centered Image -->
+   <div class="image-container">
+    <img src="qrcode.jpg" alt="Centered Image">
+    <h2>Scan to Donate some Money</h2>
+</div>
+
+<!-- Donation Form -->
+<div class="container mx-auto p-4 mt-6 bg-white rounded shadow-md">
+    <h2 class="text-xl font-bold">Make a Donation</h2>
+    <form id="donationForm">
+        <label for="donorName">Name:</label>
+        <input type="text" id="donorName" placeholder="Enter your name" class="block border p-2 rounded w-full" required>
+        <label for="contactNumber">Contact:</label>
+        <input type="text" id="contactNumber" placeholder="Enter your contact" class="block border p-2 rounded w-full" required>
+        <label for="donationAmount">Amount:</label>
+        <input type="number" id="donationAmount" placeholder="Enter amount" class="block border p-2 rounded w-full" required>
+        <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Donate</button>
+    </form>
+</div>
+</div>
+</section>
+<!-- New Content Section below the image -->
+<section class="additional-content">
+  <div class="text-container">
+    <h2>Support Us</h2>
+    <h2>Together, We Can Make a Difference</h2>
+    <p>
+      At Sahti Velan Universal Foundation, we are committed to creating a better tomorrow by supporting underprivileged families,<br>empowering students, and offering help during times of crisis. Your contribution can bring hope and change lives.
+    </p>
+    <p>
+      By focusing on education, health, and community development, the foundation envisions a brighter future for all. Join us in our journey to create a better tomorrow for those who need it most.
+    </p>
+  <h2>Nourish with Food & Care</h2>
+  <p>Access to proper nourishment is a fundamental right. By contributing to our food programs, you help provide essential meals to families who would otherwise go hungry. Your donations provide nutritious food and meals to children, adults, and elderly individuals in need, ensuring their health and well-being are prioritized.
+    Together, we can make sure no one goes to bed hungry.</p>
+
+    <h2>Provide a Safe Shelter</h2>
+    <p>
+Everyone deserves a safe and secure place to call home. By supporting our initiatives to provide shelter, you are helping families and individuals who are struggling to find stability. Your contribution ensures that vulnerable communities have a safe space to rest, rebuild, and thrive.
+Join us in offering comfort and security to those who need it the most.
+    </p>
+
+    <h2>Empower through Education</h2>
+    <p>
+      Education is the key to breaking the cycle of poverty and empowering individuals to shape their own future. Your support enables us to provide books, school supplies, and resources for children, as well as scholarships and training programs for adults. By investing in education, you are investing in a brighter tomorrow for the next generation.
+      Help us create opportunities for those who are eager to learn and grow.
+    </p>
+  </div>
+</section>
+
     
 
-     <!-- Centered Image -->
-     <div class="image-container">
-        <img src="qrcode.jpg" alt="Centered Image">
-        <h2>Scan to Donate some Money</h2>
-    </div>
+    <!-- JavaScript -->
+    <script>
+        function saveDonorData(donor) {
+            const donors = JSON.parse(localStorage.getItem("donors")) || [];
+            donors.push(donor);
+            localStorage.setItem("donors", JSON.stringify(donors));
+        }
 
-    <form action="#" method="post">
-        <h3>Donor Information</h3>
-        <input type="text" name="donor_name" placeholder="Donor Name" required>
-        <input type="text" name="contact_number" placeholder="Contact Number" required>
-        <input type="number" name="donation_amount" placeholder="Donation Amount" min="1" required>
-        <button type="submit">Donate</button>
-    </form>
+        document.getElementById("donationForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name = document.getElementById("donorName").value;
+            const contact = document.getElementById("contactNumber").value;
+            const amount = document.getElementById("donationAmount").value;
+            saveDonorData({ name, contact, amount });
+            alert("Donation recorded successfully!");
+            document.getElementById("donationForm").reset();
+        });
+    </script>
     <!-- Footer -->
     <footer class="bg-blue-900 text-white mt-10 py-6">
         <div class="container mx-auto grid md:grid-cols-3 gap-6 text-center md:text-left">

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
+    <!-- Importing jsPDF library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SastiVelan</title>
@@ -29,8 +31,8 @@
 
     .slider img {
         width: 100%;
-        height: 300px; /* Adjust height to maintain consistency */
-        object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+        height: 100%; /* Adjust height to maintain consistency */
+        object-fit: fill; /* Ensures the image covers the container while maintaining aspect ratio */
         flex-shrink: 0;
     }
 
@@ -83,6 +85,23 @@
 .hidden {
     display: none;
 }
+body {
+    background-image: url('indeximg1.jpeg'); /* Replace with your image URL */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Adjust the dim effect (0.4 = 40% dim) */
+    z-index: -1;
+}
+
 
 
 
@@ -91,12 +110,14 @@
     </style>
 </head>
 <body class="bg-gray-100">
-
+   
+    
+    <div class="background-overlay"></div>
     <!-- Navbar -->
     <nav class="bg-blue-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div class="logo">
-                <img src="logo.png" alt="Logo" class="h-12">
+                <img src="logo.png" alt="Logo" class="h-16">
             </div>
     
             <!-- Hamburger Menu (for Mobile) -->
@@ -157,8 +178,10 @@
             <li><a href="about.html" class="block py-2">About</a></li>
             <li><a href="activity.html" class="block py-2">Special Children</a></li>
             <li><a href="#" class="block py-2">Disaster Relief</a></li>
-            <li><a href="support.html" class="hover:text-gray-300">Support</a></li>
+            <li><a href="birthdaycelebration.html" class="block py-2">birthdayCelebration</a></li>
+            <li><a href="donate.html" class="hover:text-gray-300">Support</a></li>
              <li><a href="contact.html" class="hover:text-gray-300">Contact</a></li>
+             
 
     
             <!-- Mobile Dropdowns -->
@@ -184,8 +207,78 @@
         </ul>
     </nav>
     
-    
+    <!-- Donate Now Button -->
+<div class="flex justify-center my-4">
+    <a href="donate.html" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded">
+        Donate Now
+    </a>
+</div>
+<h2 style="text-align: center ;color: rgb(197, 231, 102);"> Our Top Donors <br>We extend our heartfelt gratitude to you</h2>
+    <div id="topDonors" style="text-align: center; margin: 20px;">
+        <!-- Top donors will be displayed here -->
+    </div>
 
+    <script>
+    function generateCertificate(donorName, amount) {
+            // Access jsPDF from the UMD module
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add text to the certificate
+            doc.setFontSize(20);
+            doc.text("Certificate of Appreciation", 20, 40);
+            doc.setFontSize(14);
+            doc.text("This certificate is proudly presented to", 20, 60);
+            doc.setFontSize(18);
+            doc.text(donorName, 20, 80);
+            doc.setFontSize(14);
+            doc.text(`For their generous donation of INR ${amount}`, 20, 100);
+            doc.text("Your contribution is greatly appreciated!", 20, 120);
+            doc.setFontSize(12);
+            doc.text("Thank you for your support!", 20, 140);
+
+            // Save the PDF with the donor's name
+            doc.save(`${donorName}_Certificate.pdf`);
+        }
+
+
+
+    
+        function displayTopDonors() {
+            let topDonors = JSON.parse(localStorage.getItem("topDonors")) || [];
+            let topDonorsContainer = document.getElementById("topDonors");
+    
+            topDonorsContainer.innerHTML = ""; // Clear existing content
+    
+            if (topDonors.length === 0) {
+                topDonorsContainer.innerHTML = "<p>No donors available.</p>";
+                return;
+            }
+    
+            topDonors.forEach((donor, index) => {
+                let badge = "";
+                if (index === 0) {
+                    badge = "🥇 Gold Donor";
+                } else if (index === 1) {
+                    badge = "🥈 Silver Donor";
+                } else if (index === 2) {
+                    badge = "🥉 Bronze Donor";
+                }
+    
+                let donorInfo = `
+                    <p style="color: pink; font-size: 20px;">
+                        ${badge} <span style="color:orange;">${donor.name}</span> - Rs.${donor.amount}
+                        <button style="margin-left: 10px; background-color: green; color: white; padding: 3px 8px; border-radius: 3px; font-size: 14px;"
+    onclick="generateCertificate('${donor.name}', '${donor.amount}')">Download Certificate</button>
+
+                    </p>
+                `;
+                topDonorsContainer.innerHTML += donorInfo;
+            });
+        }
+        // Display top donors when the page loads
+        window.onload = displayTopDonors;
+    </script>
     <!-- Image Slider -->
     <div class="slider-container mt-8">
         <div class="slider">

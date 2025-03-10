@@ -80,6 +80,7 @@
     </style>
 </head>
 <body class="bg-gray-100">
+    
 
     <!-- Navbar -->
     <nav class="bg-blue-600 p-4">
@@ -146,7 +147,7 @@
             <li><a href="about.html" class="block py-2">About</a></li>
             <li><a href="activity.html" class="block py-2">Special Children</a></li>
             <li><a href="#" class="block py-2">Disaster Relief</a></li>
-            <li><a href="support.html" class="hover:text-gray-300">Support</a></li>
+            <li><a href="donate.html" class="hover:text-gray-300">Support</a></li>
             <li><a href="contact.html" class="hover:text-gray-300">Contact</a></li>
 
     
@@ -175,27 +176,46 @@
     
     
 
-    <h2 style="text-align: center;">Contact List</h2>
-    <table border="1" style="width: 100%; border-collapse: collapse;">
-        <thead>
-            <tr style="background: #ddd;">
-                <th style="padding: 10px;">Name</th>
-                <th style="padding: 10px;">Email</th>
-                <th style="padding: 10px;">Message</th>
-            </tr>
-        </thead>
-        <tbody id="contactTable">
-            <!-- Contact details will be inserted here -->
-        </tbody>
-    </table>
-
+    <h2 style="text-align: center;">Contact and Donor Details</h2>
+    <div class="flex justify-center gap-8 p-4">
+    
+        <!-- Contact List Table -->
+        <table border="1" class="bg-white shadow-md rounded" style="width: 45%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #ddd;">
+                    <th style="padding: 10px;">Name</th>
+                    <th style="padding: 10px;">Email</th>
+                    <th style="padding: 10px;">Message</th>
+                </tr>
+            </thead>
+            <tbody id="contactTable">
+                <!-- Contact details will be inserted here -->
+            </tbody>
+        </table>
+    
+        <!-- Donor Details Table -->
+        <table border="1" class="bg-white shadow-md rounded" style="width: 45%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #ddd;">
+                    <th style="padding: 10px;">Donor Name</th>
+                    <th style="padding: 10px;">Donation Amount</th>
+                    <th style="padding: 10px;">Donor Contact</th>
+                </tr>
+            </thead>
+            <tbody id="donorTable">
+                <!-- Donor details will be inserted here -->
+            </tbody>
+        </table>
+    
+    </div>
+    
     <script>
         function loadContacts() {
             let contactData = JSON.parse(localStorage.getItem("contacts")) || [];
             let tableBody = document.getElementById("contactTable");
-
+    
             tableBody.innerHTML = ""; // Clear existing content
-
+    
             contactData.forEach(contact => {
                 let row = `<tr>
                     <td style="padding: 10px;">${contact.name}</td>
@@ -205,10 +225,47 @@
                 tableBody.innerHTML += row;
             });
         }
+    
+        function loadDonors() {
+            let donorData = JSON.parse(localStorage.getItem("donors")) || [];
+            let donorTableBody = document.getElementById("donorTable");
 
-        // Load contacts when the page loads
-        window.onload = loadContacts;
+            // Sort the donors by donation amount in descending order
+            donorData.sort((a, b) => b.amount - a.amount);
+
+            donorTableBody.innerHTML = ""; // Clear existing content
+
+            donorData.forEach((donor, index) => {
+                // Assign badge based on the rank
+                let badge = "";
+                if (index === 0) {
+                    badge = "🥇 Gold Donor";
+                } else if (index === 1) {
+                    badge = "🥈 Silver Donor";
+                } else if (index === 2) {
+                    badge = "🥉 Bronze Donor";
+                }
+
+                let row = `<tr>
+                    <td style="padding: 10px;">${donor.name} ${badge}</td>
+                    <td style="padding: 10px;">${donor.amount}</td>
+                    <td style="padding: 10px;">${donor.contact}</td>
+                </tr>`;
+                donorTableBody.innerHTML += row;
+            });
+
+            // Store the top 3 donors in localStorage to be accessible on the index page
+            localStorage.setItem("topDonors", JSON.stringify(donorData.slice(0, 3)));
+        }
+    
+        // Load contacts and donors when the page loads
+        window.onload = function() {
+            loadContacts();
+            loadDonors();
+        };
     </script>
+    
+
 
     <!-- Footer -->
     <footer class="bg-blue-900 text-white mt-10 py-6">
@@ -242,7 +299,7 @@
         </div>
         <p class="text-center mt-6">© 2025 All Rights Reserved</p>
     </footer>
-
+     
     <!-- JavaScript -->
     
       
