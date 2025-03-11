@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SastiVelan</title>
     <link rel="stylesheet" href="contactstyle.css" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom styles for dropdown */
@@ -216,42 +219,28 @@
       <h2>Contact Us</h2>
       <div class="contact-banner-container">
         <div class="transparent-contact-form">
-          <form id="contactForm" method="GET">
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" placeholder="Enter your name" required />
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email" required />
-            </div>
-
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" placeholder="Your message" required></textarea>
-            </div>
-
-            <button type="submit">Send Message</button>
-        </form>
+            <form action ="" id="contactForm" >
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required />
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required />
+                </div>
+    
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Your message" required></textarea>
+                </div>
+    
+                <button type="submit">Send Message</button>
+            </form>
     </div>
 
     <script>
-        document.getElementById("contactForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form from refreshing
-
-            let name = document.getElementById("name").value;
-            let email = document.getElementById("email").value;
-            let message = document.getElementById("message").value;
-
-            let contactData = JSON.parse(localStorage.getItem("contacts")) || [];
-            contactData.push({ name, email, message });
-
-            localStorage.setItem("contacts", JSON.stringify(contactData));
-
-            alert("Message sent successfully!");
-            document.getElementById("contactForm").reset();
-        });
+       
         // Hamburger menu toggle
         document.getElementById("hamburger").addEventListener("click", function () {
             document.getElementById("mobile-menu").classList.toggle("hidden");
@@ -289,7 +278,7 @@
                 <h2 class="font-bold text-lg">Contact</h2>
                 <p class="mt-2">Email: mlakshimipriya715@gmail.com</p>
                 <p>Phone: 6374512190</p>
-                <p>Address: 123 Street, City, Country</p>
+                <p>Address:No, 3 marriyaman kovil street vanarapalayam. Cuddalore pincode=607001</p>
             </div>
             <!-- Social Media -->
             <div>
@@ -306,33 +295,59 @@
 
     <!-- JavaScript -->
     
-      
     <script>
-        
-        // Slider functionality
-        let slideIndex = 0;
-const slides = document.querySelectorAll(".slider img");
-const totalSlides = slides.length;
+        // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDU8ZrV9Rfc_TFKH2qPlPu5CczqhfZ1JB8",
+    authDomain: "trust-ff434.firebaseapp.com",
+    databaseURL: "https://trust-ff434-default-rtdb.firebaseio.com",
+    projectId: "trust-ff434",
+    storageBucket: "trust-ff434.firebasestorage.app",
+    messagingSenderId: "444522737024",
+    appId: "1:444522737024:web:d37acd02a67f77ab0e2565"
+  };
+ 
 
-function showSlide(index) {
-    if (index >= totalSlides) slideIndex = 0;
-    if (index < 0) slideIndex = totalSlides - 1;
-    document.querySelector(".slider").style.transform = `translateX(-${slideIndex * 100}vw)`;
+// initialize firebase
+firebase.initializeApp(firebaseConfig);
+
+// reference your database
+var contactFormDB = firebase.database().ref("contactForm");
+
+document.getElementById("contactForm").addEventListener("submit", submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+
+  var name = getElementVal("name");
+  var emailid = getElementVal("email");
+  var msgContent = getElementVal("message");
+
+  saveMessages(name, emailid, msgContent);
+
+  
+
+  
+  //   reset the form
+  document.getElementById("contactForm").reset();
 }
 
-function nextSlide() {
-    slideIndex++;
-    showSlide(slideIndex);
-}
+const saveMessages = (name, emailid, msgContent) => {
+  var newContactForm = contactFormDB.push();
 
-function prevSlide() {
-    slideIndex--;
-    showSlide(slideIndex);
-}
+  newContactForm.set({
+    name: name,
+    emailid: emailid,
+    msgContent: msgContent,
+  });
+};
 
-setInterval(nextSlide, 3000); // Auto slide every 3 seconds
+const getElementVal = (id) => {
+  return document.getElementById(id).value;
+};
 
-    </script> 
+    </script>
+   
     <script>
         
       

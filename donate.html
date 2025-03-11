@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SastiVelan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
     <link rel="stylesheet" href="supportstyle.css" />
 
     <style>
@@ -199,15 +201,24 @@
 <!-- Donation Form -->
 <div class="container mx-auto p-4 mt-6 bg-white rounded shadow-md">
     <h2 class="text-xl font-bold">Make a Donation</h2>
-    <form id="donationForm">
-        <label for="donorName">Name:</label>
-        <input type="text" id="donorName" placeholder="Enter your name" class="block border p-2 rounded w-full" required>
-        <label for="contactNumber">Contact:</label>
-        <input type="text" id="contactNumber" placeholder="Enter your contact" class="block border p-2 rounded w-full" required>
-        <label for="donationAmount">Amount:</label>
-        <input type="number" id="donationAmount" placeholder="Enter amount" class="block border p-2 rounded w-full" required>
-        <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded">Donate</button>
+    <form id="donationForm" class="max-w-md mx-auto bg-gray-100 p-6 rounded shadow-md">
+        <h2 class="text-xl font-bold mb-4">Make a Donation</h2>
+    
+        <label for="donorName" class="block mb-2">Name:</label>
+        <input type="text" id="donorName" name="donorName" placeholder="Enter your name" class="block border p-2 rounded w-full mb-4" required>
+    
+        <label for="contactNumber" class="block mb-2">Contact:</label>
+        <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter your contact" class="block border p-2 rounded w-full mb-4" required>
+    
+        <label for="donationAmount" class="block mb-2">Amount:</label>
+        <input type="number" id="donationAmount" name="donationAmount" placeholder="Enter amount" class="block border p-2 rounded w-full mb-4" required>
+    
+        <label for="message" class="block mb-2">Message (Optional):</label>
+        <textarea id="message" name="message" placeholder="Your message..." class="block border p-2 rounded w-full mb-4"></textarea>
+    
+        <button type="submit" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-700">Donate</button>
     </form>
+    
 </div>
 </div>
 </section>
@@ -244,21 +255,51 @@ Join us in offering comfort and security to those who need it the most.
 
     <!-- JavaScript -->
     <script>
-        function saveDonorData(donor) {
-            const donors = JSON.parse(localStorage.getItem("donors")) || [];
-            donors.push(donor);
-            localStorage.setItem("donors", JSON.stringify(donors));
-        }
+       
+        // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDU8ZrV9Rfc_TFKH2qPlPu5CczqhfZ1JB8",
+    authDomain: "trust-ff434.firebaseapp.com",
+    databaseURL: "https://trust-ff434-default-rtdb.firebaseio.com",
+    projectId: "trust-ff434",
+    storageBucket: "trust-ff434.firebasestorage.app",
+    messagingSenderId: "444522737024",
+    appId: "1:444522737024:web:d37acd02a67f77ab0e2565"
+  };
+ 
 
-        document.getElementById("donationForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const name = document.getElementById("donorName").value;
-            const contact = document.getElementById("contactNumber").value;
-            const amount = document.getElementById("donationAmount").value;
-            saveDonorData({ name, contact, amount });
-            alert("Donation recorded successfully!");
-            document.getElementById("donationForm").reset();
+// initialize firebase
+firebase.initializeApp(firebaseConfig);
+
+    const donationForm = document.getElementById('donationForm');
+
+    donationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const donorName = document.getElementById('donorName').value;
+        const contactNumber = document.getElementById('contactNumber').value;
+        const donationAmount = document.getElementById('donationAmount').value;
+        const message = document.getElementById('message').value;
+
+        saveDonation(donorName, contactNumber, donationAmount, message);
+
+        alert("Thank you for your generous donation!");
+        donationForm.reset();
+    });
+
+    function saveDonation(donorName, contactNumber, donationAmount, message) {
+        const donationRef = firebase.database().ref('donations');
+        const newDonationRef = donationRef.push();
+
+        newDonationRef.set({
+            donorName: donorName,
+            contactNumber: contactNumber,
+            donationAmount: donationAmount,
+            message: message
         });
+    }
+
+
     </script>
     <!-- Footer -->
     <footer class="bg-blue-900 text-white mt-10 py-6">
@@ -278,7 +319,7 @@ Join us in offering comfort and security to those who need it the most.
                 <h2 class="font-bold text-lg">Contact</h2>
                 <p class="mt-2">Email: mlakshimipriya715@gmail.com</p>
                 <p>Phone: 6374512190</p>
-                <p>Address: 123 Street, City, Country</p>
+                <p>Address: No, 3 marriyaman kovil street vanarapalayam. Cuddalore pincode=607001</p>
             </div>
             <!-- Social Media -->
             <div>
@@ -309,28 +350,7 @@ Join us in offering comfort and security to those who need it the most.
             });
         });
 
-        // Slider functionality
-        let slideIndex = 0;
-const slides = document.querySelectorAll(".slider img");
-const totalSlides = slides.length;
-
-function showSlide(index) {
-    if (index >= totalSlides) slideIndex = 0;
-    if (index < 0) slideIndex = totalSlides - 1;
-    document.querySelector(".slider").style.transform = `translateX(-${slideIndex * 100}vw)`;
-}
-
-function nextSlide() {
-    slideIndex++;
-    showSlide(slideIndex);
-}
-
-function prevSlide() {
-    slideIndex--;
-    showSlide(slideIndex);
-}
-
-setInterval(nextSlide, 3000); // Auto slide every 3 seconds
+      
 
     </script> 
     <script>

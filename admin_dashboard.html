@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
     <title>SastiVelan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -208,54 +210,62 @@
         </table>
     
     </div>
-    
     <script>
         function loadContacts() {
-            let contactData = JSON.parse(localStorage.getItem("contacts")) || [];
+            const contactRef = firebase.database().ref("contactForm");
             let tableBody = document.getElementById("contactTable");
-    
             tableBody.innerHTML = ""; // Clear existing content
     
-            contactData.forEach(contact => {
-                let row = `<tr>
-                    <td style="padding: 10px;">${contact.name}</td>
-                    <td style="padding: 10px;">${contact.email}</td>
-                    <td style="padding: 10px;">${contact.message}</td>
-                </tr>`;
-                tableBody.innerHTML += row;
+            contactRef.once("value", (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                    const contact = childSnapshot.val();
+                    let row = `<tr>
+                        <td style="padding: 10px;">${contact.name}</td>
+                        <td style="padding: 10px;">${contact.emailid}</td>
+                        <td style="padding: 10px;">${contact.msgContent}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
             });
         }
     
         function loadDonors() {
-            let donorData = JSON.parse(localStorage.getItem("donors")) || [];
+            const donorRef = firebase.database().ref("donations");
             let donorTableBody = document.getElementById("donorTable");
-
-            // Sort the donors by donation amount in descending order
-            donorData.sort((a, b) => b.amount - a.amount);
-
             donorTableBody.innerHTML = ""; // Clear existing content
-
-            donorData.forEach((donor, index) => {
-                // Assign badge based on the rank
-                let badge = "";
-                if (index === 0) {
-                    badge = "🥇 Gold Donor";
-                } else if (index === 1) {
-                    badge = "🥈 Silver Donor";
-                } else if (index === 2) {
-                    badge = "🥉 Bronze Donor";
-                }
-
-                let row = `<tr>
-                    <td style="padding: 10px;">${donor.name} ${badge}</td>
-                    <td style="padding: 10px;">${donor.amount}</td>
-                    <td style="padding: 10px;">${donor.contact}</td>
-                </tr>`;
-                donorTableBody.innerHTML += row;
+    
+            donorRef.once("value", (snapshot) => {
+                let donorData = [];
+                snapshot.forEach((childSnapshot) => {
+                    const donor = childSnapshot.val();
+                    donorData.push(donor);
+                });
+    
+                // Sort donors by donation amount in descending order
+                donorData.sort((a, b) => b.donationAmount - a.donationAmount);
+    
+                donorData.forEach((donor, index) => {
+                    // Assign badge based on the rank
+                    let badge = "";
+                    if (index === 0) {
+                        badge = "🥇 Gold Donor";
+                    } else if (index === 1) {
+                        badge = "🥈 Silver Donor";
+                    } else if (index === 2) {
+                        badge = "🥉 Bronze Donor";
+                    }
+    
+                    let row = `<tr>
+                        <td style="padding: 10px;">${donor.donorName} ${badge}</td>
+                        <td style="padding: 10px;">${donor.donationAmount}</td>
+                        <td style="padding: 10px;">${donor.contactNumber}</td>
+                    </tr>`;
+                    donorTableBody.innerHTML += row;
+                });
+    
+                // Store the top 3 donors in localStorage to be accessible on the index page
+                localStorage.setItem("topDonors", JSON.stringify(donorData.slice(0, 3)));
             });
-
-            // Store the top 3 donors in localStorage to be accessible on the index page
-            localStorage.setItem("topDonors", JSON.stringify(donorData.slice(0, 3)));
         }
     
         // Load contacts and donors when the page loads
@@ -285,7 +295,7 @@
                 <h2 class="font-bold text-lg">Contact</h2>
                 <p class="mt-2">Email: mlakshimipriya715@gmail.com</p>
                 <p>Phone: 6374512190</p>
-                <p>Address: 123 Street, City, Country</p>
+                <p>Address:No, 3 marriyaman kovil street vanarapalayam. Cuddalore pincode=607001</p>
             </div>
             <!-- Social Media -->
             <div>
@@ -316,29 +326,20 @@
             });
         });
 
-        // Slider functionality
-        let slideIndex = 0;
-const slides = document.querySelectorAll(".slider img");
-const totalSlides = slides.length;
+            // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDU8ZrV9Rfc_TFKH2qPlPu5CczqhfZ1JB8",
+    authDomain: "trust-ff434.firebaseapp.com",
+    databaseURL: "https://trust-ff434-default-rtdb.firebaseio.com",
+    projectId: "trust-ff434",
+    storageBucket: "trust-ff434.firebasestorage.app",
+    messagingSenderId: "444522737024",
+    appId: "1:444522737024:web:d37acd02a67f77ab0e2565"
+  };
+ 
 
-function showSlide(index) {
-    if (index >= totalSlides) slideIndex = 0;
-    if (index < 0) slideIndex = totalSlides - 1;
-    document.querySelector(".slider").style.transform = `translateX(-${slideIndex * 100}vw)`;
-}
-
-function nextSlide() {
-    slideIndex++;
-    showSlide(slideIndex);
-}
-
-function prevSlide() {
-    slideIndex--;
-    showSlide(slideIndex);
-}
-
-setInterval(nextSlide, 3000); // Auto slide every 3 seconds
-
+// initialize firebase
+firebase.initializeApp(firebaseConfig);
     </script> 
     <script>
         
