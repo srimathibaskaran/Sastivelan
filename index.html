@@ -2,7 +2,10 @@
 <html lang="en">
 <head> 
     <!-- Importing jsPDF library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SastiVelan</title>
@@ -116,8 +119,9 @@ body {
     <!-- Navbar -->
     <nav class="bg-blue-600 p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="logo">
+            <div class="logo flex items-center space-x-3">
                 <img src="logo.png" alt="Logo" class="h-16">
+                <span class="text-white text-2xl font-semibold">Sasti Velan Universal Foundation</span>
             </div>
     
             <!-- Hamburger Menu (for Mobile) -->
@@ -221,33 +225,37 @@ body {
     <div id="topDonors" style="text-align: center; margin: 20px;"></div>
 
 <script>
-    function generateCertificate(donorName, amount) {
-        // Access jsPDF from the UMD module
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+    const firebaseConfig = {
+    apiKey: "AIzaSyDU8ZrV9Rfc_TFKH2qPlPu5CczqhfZ1JB8",
+    authDomain: "trust-ff434.firebaseapp.com",
+    databaseURL: "https://trust-ff434-default-rtdb.firebaseio.com",
+    projectId: "trust-ff434",
+    storageBucket: "trust-ff434.firebasestorage.app",
+    messagingSenderId: "444522737024",
+    appId: "1:444522737024:web:d37acd02a67f77ab0e2565"
+  };
+ 
 
-        // Add text to the certificate
-        doc.setFontSize(20);
-        doc.text("Certificate of Appreciation", 20, 40);
-        doc.setFontSize(14);
-        doc.text("This certificate is proudly presented to", 20, 60);
-        doc.setFontSize(18);
-        doc.text(donorName, 20, 80);
-        doc.setFontSize(14);
-        doc.text(`For their generous donation of INR ${amount}`, 20, 100);
-        doc.text("Your contribution is greatly appreciated!", 20, 120);
-        doc.setFontSize(12);
-        doc.text("Thank you for your support!", 20, 140);
+// initialize firebase
+firebase.initializeApp(firebaseConfig);
 
-        // Save the PDF with the donor's name
-        doc.save(`${donorName}_Certificate.pdf`);
-    }
+function displayTopDonors() {
+    const donorRef = firebase.database().ref("donations");
+    let topDonorsContainer = document.getElementById("topDonors");
+    topDonorsContainer.innerHTML = ""; // Clear existing content
 
-    function displayTopDonors() {
-        let topDonors = JSON.parse(localStorage.getItem("topDonors")) || [];
-        let topDonorsContainer = document.getElementById("topDonors");
+    donorRef.once("value", (snapshot) => {
+        let donorData = [];
+        snapshot.forEach((childSnapshot) => {
+            const donor = childSnapshot.val() || {}; // Safely access donor object
+            donorData.push(donor);
+        });
 
-        topDonorsContainer.innerHTML = ""; // Clear existing content
+        // Sort donors by donation amount in descending order
+        donorData.sort((a, b) => b.donationAmount - a.donationAmount);
+
+        // Get top 3 donors
+        const topDonors = donorData.slice(0, 3);
 
         if (topDonors.length === 0) {
             topDonorsContainer.innerHTML = "<p>No donors available.</p>";
@@ -266,14 +274,16 @@ body {
 
             let donorInfo = `
                 <p style="color: pink; font-size: 20px;">
-                    ${badge} <span style="color:orange;">${donor.donorName}</span> - Rs.${donor.donationAmount}
+                    ${badge} <span style="color:orange;">${donor.donorName || 'Unknown'}</span> - Rs.${donor.donationAmount || '0'}
                     <button style="margin-left: 10px; background-color: green; color: white; padding: 3px 8px; border-radius: 3px; font-size: 14px;"
-                        onclick="generateCertificate('${donor.donorName}', '${donor.donationAmount}')">Download Certificate</button>
+                        onclick="generateCertificate('${donor.donorName || 'Unknown'}', '${donor.donationAmount || '0'}')">Download Certificate</button>
                 </p>
             `;
             topDonorsContainer.innerHTML += donorInfo;
         });
-    }
+    });
+}
+
 
     // Display top donors when the page loads
     window.onload = displayTopDonors;
